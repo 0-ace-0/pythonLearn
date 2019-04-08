@@ -30,11 +30,15 @@ for word in urlopen(WORD_URL).readlines():
     WORDS.append(word.strip().decode("utf-8"))
 
 def convert(snippet, phrase):
+    #creates a random list of class names based on the number of ‘%%%’ substrings in the snippet that is passed.
     class_names = [w.capitalize() for w in random.sample(WORDS, snippet.count("%%%"))]
+    #creates another random list of words based on the the number of ‘***’ substrings in the snippet
     other_names = random.sample(WORDS, snippet.count("***"))
     results = []
     param_names = []
 
+    # This loop creates a list of parameter names, based on the number of 
+    #‘@@@’ substrings and appends each list to the `param_names` list.
     for i in range(0, snippet.count("@@@")):
         param_count = random.randint(1,3)
         param_names.append(', '.join(random.sample(WORDS, param_count)))
